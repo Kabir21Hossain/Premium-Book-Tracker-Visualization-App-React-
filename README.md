@@ -61,20 +61,20 @@ graph TD
 sequenceDiagram
     autonumber
     actor User
-    participant Details as BookDetails Page
-    participant Context as BookProvider (React Context)
-    participant LocalDB as localDB Utility
-    participant LocalStorage as Browser LocalStorage
+    participant Details as "BookDetails Page"
+    participant Context as "BookProvider (React Context)"
+    participant LocalDB as "localDB Utility"
+    participant LocalStorage as "Browser LocalStorage"
 
-    User->>Details: Click "Mark as Read"
+    User->>Details: Click 'Mark as Read'
     Details->>Context: Check if book is already in readList
     alt Already exists
-        Context-->>User: Toast Warning ("Already read!")
+        Context-->>User: Toast Warning: Already read!
     else New Book
-        Details->>Context: Update state `setReadList([...readList, book])`
-        Details->>LocalDB: Call `addToLocalDB(book)`
-        LocalDB->>LocalStorage: Parse JSON -> Push Book -> Stringify -> Save
-        Details-->>User: Toast Success ("Added to read list!")
+        Details->>Context: Update readList state
+        Details->>LocalDB: Call addToLocalDB(book)
+        LocalDB->>LocalStorage: Save stringified book array
+        Details-->>User: Toast Success: Added to read list!
     end
 ```
 
